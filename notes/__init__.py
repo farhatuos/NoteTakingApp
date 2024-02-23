@@ -49,6 +49,13 @@ def __get_date_now() -> str:
 
 
 def add_note(note: Note) -> bool:
+    """
+    Add a new note to the SQLite database.
+
+    :param: note (Note): The Note object containing note details.
+    :return: bool: True if the note is successfully added, False otherwise.
+    :raise: sqlite3.Error: If there is an error during database operations.
+    """
     try:
         # Initialise an SQLite database connection.
         connection: sqlite3.Connection = __get_connection()
