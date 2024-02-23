@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaNote</title>
+    <link rel="stylesheet" href="/static/dashboard_style.css">
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release-pro/v4.0.0/css/line.css">
+
+    <script>
+
+        const addBox = document.querySelector(".add-box");
+        const popUpBox = document.querySelector(".popup-box");
+        const closeIcon = document.querySelector("header i");
+        const titleTag= document.querySelector("input");
+        const descTag= document.querySelector("textarea");
+        const addBtn = popUpBox.querySelector("button");
+        const popupTitle = document.querySelector("header p");
+
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        addBox.addEventListener("click", function(){
+           titleTag.focus();
+            popUpBox.classList.add("show")
+        });
+
+
+    </script>
+</head>
+<body>
+
+    <div class="popup-box">
+        <div class="popup show">
+            <div class="content">
+                <header>
+                    <p>Add a new note</p>
+                    <i class="uil uil-times"></i>
+                </header>
+                <form action="#">
+                    <div class="row tile">
+                        <label>Title</label>
+                        <input type="text" id="input">
+                    </div>
+                    <div class="row description">
+                        <label for="">Description</label>
+                       <textarea name="" id=""></textarea>
+                    </div>
+                    <button class="add-note">Add Note</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<div class="wrapper">
+   <li class="add-box">
+    <div class="icon"><i class="uil uil-plus"></i></div>
+    <p>Add new note</p>
+   </li>
+
+   <li class="note">
+    <div class="details">
+        <p>This is a Title</p>
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. A natus commodi facilis quidem hic molestias, odio consequatur, soluta officia enim delectus adipisci, repellendus et nostrum repudiandae nesciunt. Vitae, ipsa neque?</span>
+    </div>
+
+
+</div>
+<script src="index.js"></script>
+</body>
+</html>
+
