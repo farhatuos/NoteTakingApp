@@ -1,6 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for, request, session, make_response, jsonify
 import sqlite3
 import os
+import hashlib
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] =[os.urandom(24)]
