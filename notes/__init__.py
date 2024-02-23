@@ -41,6 +41,10 @@ def __get_connection() -> sqlite3.Connection:
 
 
 def __get_date_now() -> str:
+    """
+    Gathers the date and time for when the function is called.
+    :return: (str) The date and time now.
+    """
     return datetime.datetime.now().strftime("%m/%d/%Y %H:%M:%S")
 
 
@@ -68,7 +72,12 @@ def add_note(note: Note) -> bool:
         raise error
 
 
-def remove_note(identification: int) -> bool:
+def remove_note(identification: int) -> Note:
+    """
+    Removes the note corresponding to the parametrised identification value.
+    :param identification: The ID of the note desired for removal.
+    :return: (None)
+    """
     try:
         # Initialise an SQLite database connection.
         connection: sqlite3.Connection = __get_connection()
@@ -81,8 +90,6 @@ def remove_note(identification: int) -> bool:
         connection.commit()
         connection.close()
 
-        return True
-
     except sqlite3.Error as error:
 
         # Log the error for future record.
@@ -93,6 +100,14 @@ def remove_note(identification: int) -> bool:
 
 
 def update_note(identification: int, title: str, description: str) -> None:
+    """
+    Updates the note with the parametrised identification value.
+
+    :param identification:
+    :param title:
+    :param description:
+    :return:
+    """
     try:
         # Initialise an SQLite database connection.
         connection: sqlite3.Connection = __get_connection()
