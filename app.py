@@ -1,8 +1,10 @@
-from flask import Flask, render_template, flash, redirect, url_for, request
+from flask import Flask, render_template, flash, redirect, url_for, request, session, make_response, jsonify
 import sqlite3
 import os
+import hashlib
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] =[os.urandom(24)]
 
 def global_var(Uname):
     global globalUsername
@@ -10,8 +12,31 @@ def global_var(Uname):
     return globalUsername
 
 @app.route('/')
-def index():  # put application's code here
-    return render_template('index.html')
+def index():
+    cookie = request.cookies.get('userID')
+    if cookie != "":
+        resp = make_response(render_template('logoutcookie.html'))
+        resp.set_cookie('userID', "")
+        return resp
+    else:
+        return render_template('index.html')
+
+@app.route('/userpage', methods=['GET', 'POST'])
+def userpage():
+    try:
+        cookie = request.cookies.get('userID')  # get the cookie
+        database = r"userdatabase.db"  # database file
+        conn = None
+        conn = sqlite3.connect(database)  # connecting to the database
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM users WHERE username = ?', (cookie,))  # querying the database
+        user = cur.fetchall()
+        cur.close()
+    except IndexError:
+        flash('Error')
+    name = request.cookies.get('userID')  # get the cookie
+    data = name
+    return render_template('userpage.html', data=data)
 
 @app.route('/createaccount', methods=['GET', 'POST'])
 def createaccount():
@@ -45,7 +70,10 @@ def createaccount():
                         cur.execute('INSERT INTO users VALUES(?, ?, ?)', (username, password, administrator))
                         conn.commit()
                         cur.close()
-                        return redirect(url_for('createaccountsuccess', globalUsername = username))
+                        resp = make_response(
+                        render_template('readcookie.html'))  # setting the cookie connected to the username
+                        resp.set_cookie('userID', username)
+                        return resp
             except IndexError:
                 flash('Username or Password is incorrect!')
     return render_template('createaccount.html')
@@ -76,7 +104,9 @@ def login():
                 Pword = User[1]
                 if Uname == username and Pword == password:
                     global_var(Uname)
-                    return redirect(url_for('loginsuccess', globalUsername=Uname))
+                    resp = make_response(render_template('readcookie.html'))
+                    resp.set_cookie('userID', Uname)  # setting the cookie connected to the username
+                    return resp
                 else:
                     # globalAttempt = global_var2(globalAttempt)
                     flash('Username or Password is incorrect!')
