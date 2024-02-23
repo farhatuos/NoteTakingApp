@@ -4,14 +4,17 @@ import os
 
 app = Flask(__name__)
 
+
 def global_var(Uname):
     global globalUsername
     globalUsername = Uname
     return globalUsername
 
+
 @app.route('/')
 def index():  # put application's code here
     return render_template('index.html')
+
 
 @app.route('/createaccount', methods=['GET', 'POST'])
 def createaccount():
@@ -49,6 +52,7 @@ def createaccount():
             except IndexError:
                 flash('Username or Password is incorrect!')
     return render_template('createaccount.html')
+
 
 @app.route('/login' , methods=['GET', 'POST'])
 def login():
@@ -88,19 +92,23 @@ def login():
                 # print(globalAttempt)
     return render_template('login.html')
 
+
 @app.route('/loginscucess/<globalUsername>')
 def loginsuccess(globalUsername):
     globalUsername = globalUsername
     return render_template('loginsuccess.html', globalUsername = globalUsername)
+
 
 @app.route('/createaccountsuccess/<globalUsername>')
 def createaccountsuccess(globalUsername):
     globalUsername = globalUsername
     return render_template('createaccountsuccess.html', globalUsername = globalUsername)
 
+
 @app.route('/logout')
 def logout():
     return render_template('logout.html')
+
 
 if __name__ == '__main__':
     app.run()
