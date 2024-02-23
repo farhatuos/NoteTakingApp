@@ -1,0 +1,31 @@
+/* CSS for the application */
+/* webpage background color */
+body {
+  background-color: powderblue;
+}
+h1 {
+  color: blue;
+}
+p {
+  color: red;
+}
+li {
+  color: orangered;
+}
+/* image layout */
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 18%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}

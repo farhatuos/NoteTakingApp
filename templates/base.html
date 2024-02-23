@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} - FlaskApp</title>
+    <style>
+        .message {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f3f3f3
+        }
+        nav a {
+            color: #d64161;
+            font-size: 2em;
+            margin-left: 50px;
+            text-decoration: none;
+        }
+        .badalert {
+            padding: 20px;
+            margin: 5px;
+            color: #970020;
+            background-color: #ffd5de;
+        }
+        .goodalert {
+            padding: 20px;
+            margin: 5px;
+            color: #26ff00;
+            background-color: #e0ffd5;
+        }
+
+    </style>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Index</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('createaccount') }}">Create Account</a>
+
+    </nav>
+    <hr>
+    <div class="content">
+        {% for message in get_flashed_messages() %}
+            <div class="badalert">{{ message }}</div>
+        {% endfor %}
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>
