@@ -3,18 +3,20 @@
 <link rel="stylesheet" href="/static/style.css">
 <head>
     <meta charset="UTF-8">
-    <title>Flask App</title>
+    <title>Note Taker</title>
 </head>
 <body>
 
 {% extends 'base.html' %}
 
 {% block content %}
+<br>
+<br>
 <h1 class="heading1" align="center">Welcome to the Note Taker.</h1>
 
-<p class="text1" align="center">Please log in or create an account to continue.</p>
+<p class="text1" align="center">Welcome, {{data}}.</p>
 {% endblock %}
-<button onclick="document.location='/login'">Login</button>
+
 
 
 </body>
